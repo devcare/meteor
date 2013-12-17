@@ -363,7 +363,7 @@ Fiber(function () {
     help: "[default] Run this project in local development mode",
     argumentParser: function (opt) {
       // reparse args
-      opt.alias('port', 'p').default('port', 3000)
+      opt.alias('port', 'p').default('port', process.env.PORT)
         .describe('port', 'Port to listen on. NOTE: Also uses port N+1 and N+2.')
         .boolean('production')
         .describe('production', 'Run in production mode. Minify and bundle CSS and JS files.')
@@ -900,7 +900,7 @@ Fiber(function () {
             process.exit(1);
           }
 
-          fut.return("mongodb://127.0.0.1:" + mongod_port + "/meteor");
+          fut.return("mongodb://"+process.env.IP+":" + mongod_port + "/meteor");
         });
         mongoUrl = fut.wait();
 
@@ -1111,7 +1111,7 @@ Fiber(function () {
     help: "Test one or more packages",
     argumentParser: function (opt) {
       // This help logic should probably move to run.js eventually
-      opt .alias('port', 'p').default('port', 3000)
+      opt .alias('port', 'p').default('port', process.env.PORT)
         .describe('port', 'Port to listen on. NOTE: Also uses port N+1 and N+2.')
         .describe('deploy', 'Optionally, specify a domain to deploy to, rather than running locally.')
         .boolean('production')
